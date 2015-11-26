@@ -439,3 +439,15 @@ class Job(object):
             params['type'] = report_type
         req = self._connection.create_request('/jobs/%s/regenerate' % self.id, method='POST', params=params)
         self._connection.send_request(req)
+
+    def reject_contributor(self, worker_id, reason=''):
+        params = {
+            'reject': reason,
+        }
+
+        req = self._connection.create_request(
+            '/jobs/%s/workers/%s/reject' % (self.id, worker_id),
+            method='PUT',
+            params=params,
+        )
+        return self._connection.send_request(req)
