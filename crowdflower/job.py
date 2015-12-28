@@ -182,7 +182,7 @@ class Job(object):
         logger.debug('Updating Job[%d]: %r', self.id, params)
 
         try:
-            res = self._connection.request('/jobs/%s' % self.id, method='PUT', params=params)
+            res = self._connection.request('/jobs/%s' % self.id, method='PUT', data=dict(params))
         except CrowdFlowerError, exc:
             # CrowdFlower sometimes likes to redirect the PUT to a non-API page,
             # which will raise an error (406 Not Accepted), but we can just

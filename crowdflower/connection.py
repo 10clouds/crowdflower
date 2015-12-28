@@ -1,3 +1,4 @@
+
 import os
 import json
 from crowdflower.exception import CrowdFlowerError, CrowdFlowerJSONError
@@ -117,7 +118,7 @@ class Connection(object):
         Creates an empty job with given `props` attributes.
         '''
         params = rails_params({'job': props})
-        job_response = self.request('/jobs', method='POST', params=params)
+        job_response = self.request('/jobs', method='POST', data=dict(params))
         job = Job(job_response['id'], self)
         job._properties = job_response
         # bust cache of job_ids
